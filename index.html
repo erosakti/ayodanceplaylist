@@ -1,4 +1,63 @@
-const KNOWN_SONGS = {
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audition ABM/TBM Music Player</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center justify-center p-4">
+
+  <div class="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
+          AyoDance Web Player
+        </h1>
+        <p class="text-xs text-slate-400">Client-Side Processing Mode</p>
+      </div>
+      <span class="px-2.5 py-1 text-xs font-semibold bg-pink-500/10 text-pink-400 rounded-full border border-pink-500/20">JS Engine</span>
+    </div>
+
+    <!-- Active Song Info -->
+    <div class="text-center py-4 bg-slate-800/40 rounded-2xl mb-6 border border-slate-800">
+      <div class="w-20 h-20 mx-auto mb-3 bg-gradient-to-tr from-pink-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-pink-500/20">
+        <i class="fa-solid fa-music text-3xl text-white"></i>
+      </div>
+      <h2 id="current-title" class="text-lg font-bold text-slate-200 truncate px-4">Memuat Playlist...</h2>
+      <p id="current-file" class="text-xs text-slate-400 font-mono mt-1">-</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="mb-4">
+      <input type="range" id="seek-bar" value="0" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-pink-500">
+      <div class="flex justify-between text-[11px] text-slate-400 font-mono mt-1">
+        <span id="current-time">0:00</span>
+        <span id="duration">0:00</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center justify-center gap-6 mb-6">
+      <button id="prev-btn" class="p-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition"><i class="fa-solid fa-backward-step text-lg"></i></button>
+      <button id="play-btn" class="w-14 h-14 bg-pink-500 hover:bg-pink-600 text-white rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-105 active:scale-95"><i id="play-icon" class="fa-solid fa-play text-xl ml-0.5"></i></button>
+      <button id="next-btn" class="p-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition"><i class="fa-solid fa-forward-step text-lg"></i></button>
+    </div>
+
+    <!-- Playlist Section -->
+    <div class="border-t border-slate-800/80 pt-4">
+      <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Daftar Putar Server</p>
+      <div id="playlist-container" class="max-h-48 overflow-y-auto space-y-1 pr-1">
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-player" class="hidden"></audio>
+
+  <script>
+    const KNOWN_SONGS = {
         "b0000.tbm": "Audition - BGM Intro Default",
         "b0001.tbm": "Audition - Let's Dance"
     };
@@ -132,3 +191,6 @@ const KNOWN_SONGS = {
     document.getElementById('seek-bar').oninput = (e) => audio.currentTime = (e.target.value / 100) * audio.duration;
 
     loadPlaylist();
+  </script>
+</body>
+</html>
