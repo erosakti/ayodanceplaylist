@@ -1,15 +1,12 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "api/index.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
+      "source": "/proxy-dir",
+      "destination": "http://122.102.49.131/audition/ABM/"
+    },
     {
-      "src": "/(.*)",
-      "dest": "api/index.py"
+      "source": "/proxy-audio/:file",
+      "destination": "http://122.102.49.131/audition/ABM/:file"
     }
   ]
 }
